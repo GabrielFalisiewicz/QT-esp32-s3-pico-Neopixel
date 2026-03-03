@@ -6,7 +6,7 @@
 #include "AsyncUDP.h"
 
 const char * ssid = "JF";
-const char * password = "wifiFJ11";
+const char * password = "";
 const uint16_t port = 8001; 
 
 #define SCREEN_WIDTH 128
