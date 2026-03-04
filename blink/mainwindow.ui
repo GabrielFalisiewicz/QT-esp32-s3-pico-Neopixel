@@ -149,9 +149,9 @@ background-color: white;</string>
    <widget class="QPushButton" name="update_color_value">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>430</y>
-      <width>96</width>
+      <x>470</x>
+      <y>480</y>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
@@ -159,26 +159,13 @@ background-color: white;</string>
      <string>SET</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="color_value">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>430</y>
-      <width>241</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string>RRR,GGG,BBB</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="ipv4addr">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>470</y>
-      <width>113</width>
-      <height>26</height>
+      <x>242</x>
+      <y>520</y>
+      <width>101</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="placeholderText">
@@ -188,10 +175,10 @@ background-color: white;</string>
    <widget class="QLineEdit" name="ipHost">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>470</y>
+      <x>350</x>
+      <y>520</y>
       <width>113</width>
-      <height>26</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="placeholderText">
@@ -201,14 +188,153 @@ background-color: white;</string>
    <widget class="QPushButton" name="enter_network_data">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>470</y>
-      <width>96</width>
-      <height>26</height>
+      <x>470</x>
+      <y>520</y>
+      <width>91</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>ENTER</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="Rcolor">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>410</y>
+      <width>271</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>410</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>R:</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="Gcolor">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>430</y>
+      <width>271</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>430</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>G:</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="Bcolor">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>450</y>
+      <width>271</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>255</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>450</y>
+      <width>16</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>B:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Rvalue">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>410</y>
+      <width>31</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Gvalue">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>430</y>
+      <width>31</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Bvalue">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>450</y>
+      <width>31</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="viewColor">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>480</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
    <zorder>led3</zorder>
@@ -220,10 +346,19 @@ background-color: white;</string>
    <zorder>led0</zorder>
    <zorder>image</zorder>
    <zorder>update_color_value</zorder>
-   <zorder>color_value</zorder>
    <zorder>ipv4addr</zorder>
    <zorder>ipHost</zorder>
    <zorder>enter_network_data</zorder>
+   <zorder>Rcolor</zorder>
+   <zorder>label</zorder>
+   <zorder>Gcolor</zorder>
+   <zorder>label_2</zorder>
+   <zorder>Bcolor</zorder>
+   <zorder>label_3</zorder>
+   <zorder>Rvalue</zorder>
+   <zorder>Gvalue</zorder>
+   <zorder>Bvalue</zorder>
+   <zorder>viewColor</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

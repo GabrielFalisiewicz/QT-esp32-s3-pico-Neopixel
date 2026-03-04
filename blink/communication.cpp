@@ -15,6 +15,13 @@ void CONNECTION::send_message(std::vector<LED_MODULE> leds){
     qDebug() << result;
 }
 
+void CONNECTION::set_data(bool status){
+    this->connect_status = status;
+}
+
+bool CONNECTION::get_data_status(){
+    return this->connect_status;
+}
 
 void CONNECTION::set_host(QString host){
     this->ADDR.setAddress(host);

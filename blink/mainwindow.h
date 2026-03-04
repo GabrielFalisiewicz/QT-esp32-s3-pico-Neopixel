@@ -25,6 +25,7 @@ private slots:
     void on_update_color_value_clicked();
 
     //void on_pushButton_clicked();
+    void update_color_label(int rValue);
 
     void on_enter_network_data_clicked();
 
