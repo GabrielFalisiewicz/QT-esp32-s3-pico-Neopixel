@@ -19,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent)
     QPixmap pixmap(":/img/led.png");
     pixmap = pixmap.scaled(ui->image->height(), ui->image->width(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     ui->image->setPixmap(pixmap);
+    connect(ui->Rcolor, &QSlider::valueChanged, this, &MainWindow::update_color_label);
+    connect(ui->Gcolor, &QSlider::valueChanged, this, &MainWindow::update_color_label);
+    connect(ui->Bcolor, &QSlider::valueChanged, this, &MainWindow::update_color_label);
 }
 
 QLabel* MainWindow::get_labels(QString name){
@@ -40,6 +43,7 @@ void MainWindow::init_elemenets_GUI(){
         leds.push_back(new_led);
     }
     ui->ipHost->setValidator(new QIntValidator(0, 9999, this));
+    ui->viewColor->setStyleSheet(QString("background-color: rgba(0, 0, 0, 1);"));
 }
 
 MainWindow::~MainWindow()
@@ -62,16 +66,11 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event){
 
 void MainWindow::on_update_color_value_clicked()
 {
-    QString value_color = ui->color_value->toPlainText();
-    if(!value_color.isEmpty()){
-        QStringList values = value_color.split(',');
-        Gcurrent_color.setRgb(
-            values[0].toInt(),
-            values[1].toInt(),
-            values[2].toInt());
-    } else {
-        Gcurrent_color.setRgb(0,0,0);
-    }
+    int Rvalue = ui->Rcolor->value();
+    int Gvalue = ui->Gcolor->value();
+    int Bvalue = ui->Bcolor->value();
+    Gcurrent_color.setRgb(Rvalue, Gvalue, Bvalue);
+
     for(int i=0;i<LED_MODULE::NUM_OF_LEDS;i++){
         if(leds[i].get_active_status()){
             leds[i].set_active(0);
@@ -79,7 +78,9 @@ void MainWindow::on_update_color_value_clicked()
             leds[i].get_qlabel_ptr()->setStyleSheet(QString("border-radius: 35px; background-color: rgb(%1, %2, %3);").arg(Gcurrent_color.red()).arg(Gcurrent_color.green()).arg(Gcurrent_color.blue()));
         }
     }
-    con.send_message(leds);
+    if(con.get_data_status()){
+        con.send_message(leds);
+    }
 }
 
 
@@ -87,5 +88,19 @@ void MainWindow::on_enter_network_data_clicked()
 {
     con.set_host(ui->ipv4addr->text());
     con.set_port((ui->ipHost->text().toInt()));
+    con.set_data(true);
 }
 
+void MainWindow::update_color_label(int redValue){
+    QSlider *slider = qobject_cast<QSlider*>(sender());
+    if(slider == nullptr) return;
+
+    if(slider == ui->Rcolor){
+        ui->Rvalue->setText(QString::number(redValue));
+    } else if(slider == ui->Gcolor){
+        ui->Gvalue->setText(QString::number(redValue));
+    } else if(slider == ui->Bcolor){
+        ui->Bvalue->setText(QString::number(redValue));
+    }
+    ui->viewColor->setStyleSheet(QString("background-color: rgba(%1, %2, %3, 1);").arg((ui->Rvalue->text()).toInt()).arg((ui->Gvalue->text()).toInt()).arg((ui->Bvalue->text()).toInt()));
+}
