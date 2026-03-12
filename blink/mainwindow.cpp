@@ -6,10 +6,12 @@
 #include <QPalette>
 #include <communication.h>
 #include <QIntValidator>
+#include "udpsocket.h"
 
 QColor Gcurrent_color;
 std::vector<LED_MODULE> leds;
 CONNECTION con;
+UdpSocket OwnNetwork;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -78,17 +80,21 @@ void MainWindow::on_update_color_value_clicked()
             leds[i].get_qlabel_ptr()->setStyleSheet(QString("border-radius: 35px; background-color: rgb(%1, %2, %3);").arg(Gcurrent_color.red()).arg(Gcurrent_color.green()).arg(Gcurrent_color.blue()));
         }
     }
-    if(con.get_data_status()){
-        con.send_message(leds);
+    if(OwnNetwork.get_status()){
+       ssize_t result = OwnNetwork.sendMessage(leds);
+       qDebug() << result;
     }
 }
 
 
 void MainWindow::on_enter_network_data_clicked()
 {
-    con.set_host(ui->ipv4addr->text());
-    con.set_port((ui->ipHost->text().toInt()));
-    con.set_data(true);
+    //con.set_host(ui->ipv4addr->text());
+    //con.set_port((ui->ipHost->text().toInt()));
+    //con.set_data(true);
+    OwnNetwork.create_socket();
+    OwnNetwork.set_sockaddr(ui->ipv4addr->text(), ui->ipHost->text().toInt());
+    OwnNetwork.set_status(true);
 }
 
 void MainWindow::update_color_label(int redValue){

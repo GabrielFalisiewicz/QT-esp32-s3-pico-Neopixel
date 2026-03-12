@@ -24,7 +24,8 @@ bool CONNECTION::get_data_status(){
 }
 
 void CONNECTION::set_host(QString host){
-    this->ADDR.setAddress(host);
+    //this->ADDR.setAddress(host);
+    this->addr = host;
 }
 
 void CONNECTION::set_port(quint16 port){
