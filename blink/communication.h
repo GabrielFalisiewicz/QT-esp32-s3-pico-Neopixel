@@ -11,6 +11,7 @@ class CONNECTION{
 private:
     QUdpSocket *UDP;
     QHostAddress ADDR;
+    QString addr;
     quint16 port;
     bool connect_status;
 public:

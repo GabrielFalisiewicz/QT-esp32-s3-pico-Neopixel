@@ -12,12 +12,14 @@ SOURCES += \
     communication.cpp \
     leds.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    udpsocket.cpp
 
 HEADERS += \
     communication.h \
     leds.h \
-    mainwindow.h
+    mainwindow.h \
+    udpsocket.h
 
 FORMS += \
     mainwindow.ui

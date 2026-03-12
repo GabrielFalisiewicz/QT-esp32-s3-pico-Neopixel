@@ -6,10 +6,12 @@
 #include <QPalette>
 #include <communication.h>
 #include <QIntValidator>
+#include "udpsocket.h"
 
 QColor Gcurrent_color;
 std::vector<LED_MODULE> leds;
 CONNECTION con;
+UdpSocket OwnNetwork;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -86,9 +88,11 @@ void MainWindow::on_update_color_value_clicked()
 
 void MainWindow::on_enter_network_data_clicked()
 {
-    con.set_host(ui->ipv4addr->text());
-    con.set_port((ui->ipHost->text().toInt()));
-    con.set_data(true);
+    //con.set_host(ui->ipv4addr->text());
+    //con.set_port((ui->ipHost->text().toInt()));
+    //con.set_data(true);
+    OwnNetwork.create_socket();
+    OwnNetwork.set_sockaddr(ui->ipv4addr->text(), ui->ipHost->text().toInt());
 }
 
 void MainWindow::update_color_label(int redValue){
