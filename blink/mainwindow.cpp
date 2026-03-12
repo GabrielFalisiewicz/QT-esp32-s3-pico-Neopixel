@@ -80,8 +80,9 @@ void MainWindow::on_update_color_value_clicked()
             leds[i].get_qlabel_ptr()->setStyleSheet(QString("border-radius: 35px; background-color: rgb(%1, %2, %3);").arg(Gcurrent_color.red()).arg(Gcurrent_color.green()).arg(Gcurrent_color.blue()));
         }
     }
-    if(con.get_data_status()){
-        con.send_message(leds);
+    if(OwnNetwork.get_status()){
+       ssize_t result = OwnNetwork.sendMessage(leds);
+       qDebug() << result;
     }
 }
 
@@ -93,6 +94,7 @@ void MainWindow::on_enter_network_data_clicked()
     //con.set_data(true);
     OwnNetwork.create_socket();
     OwnNetwork.set_sockaddr(ui->ipv4addr->text(), ui->ipHost->text().toInt());
+    OwnNetwork.set_status(true);
 }
 
 void MainWindow::update_color_label(int redValue){

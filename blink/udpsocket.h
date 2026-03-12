@@ -11,11 +11,17 @@
 
 #include <leds.h>
 
+#include <system_error>
+#include <cerrno>
+
+
 class UdpSocket
 {
 private:
     int fileDescriptor; //Numer gniazda;
     int socketStatus;
+    bool status = false;
+
     struct sockaddr_in {
         sa_family_t sin_family;
         in_port_t sin_port;
@@ -27,6 +33,8 @@ public:
     UdpSocket();
     void create_socket();
     void set_sockaddr(QString addrIPv4, int Host);
+    void set_status(bool newStatus);
+    bool get_status();
     ssize_t sendMessage(std::vector<LED_MODULE> leds);
 };
 
